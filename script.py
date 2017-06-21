@@ -31,12 +31,11 @@ with open(file, newline='') as readfile:
 			 else:
 			 	link = pattern_two.search(text)
 			 	if link != None:
-			 		print(2)
 			 		site = link.group().split(" ")
 			 		site_link = site[-1].split('|')[-1]
-			 		print(site_link)
-			 		site_link = site_link.replace('{[', '')
-			 		site_link = site_link.replace(']}', '')
+			 		signs = "[]{}"
+			 		for char in signs:
+			 			site_link = site_link.replace(char, '')
 			 		site_links.append(site_link)
 		else:
 			site_links.append(sites[0].get('href'))
