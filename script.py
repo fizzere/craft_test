@@ -4,11 +4,13 @@ import sys
 import urllib.request
 from bs4 import BeautifulSoup
 
+
 pattern_one = re.compile('(?:{{[Uu][Rr][Ll]\|(.*)}})|(?:homepage\W*=\W*\[(.*)\])')
 pattern_two = re.compile('(?:url\W*=\W*(.*))')
 wiki_links = []
 site_links = []
 file = sys.argv[1]
+
 with open(file, newline='') as readfile:
 	reader = csv.reader(readfile, delimiter=' ')
 	for company in reader:
@@ -40,10 +42,8 @@ with open(file, newline='') as readfile:
 		else:
 			site_links.append(sites[0].get('href'))
 
-data = []
 with open('wikipedia_answers.csv', 'w', newline='') as writefile:
-    writer = csv.writer(writefile, delimiter=',',
-                            quotechar='"', quoting=csv.QUOTE_ALL)
+    writer = csv.writer(writefile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
     data_rows = []
     for index in range(len(wiki_links)):
     	pairs = [wiki_links[index], site_links[index]]
